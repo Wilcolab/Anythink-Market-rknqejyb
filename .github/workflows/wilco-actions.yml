@@ -3,6 +3,10 @@ on:
     branches:
       - main
 
+
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
+
 jobs:
   wilco:
     runs-on: ubuntu-latest
