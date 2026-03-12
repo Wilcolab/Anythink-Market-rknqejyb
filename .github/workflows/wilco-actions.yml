@@ -3,8 +3,8 @@ on:
     branches:
       - main
 
-
 env:
+  # Permette l'uso di versioni Node meno recenti se necessario per alcune vecchie azioni
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
 
 jobs:
@@ -27,9 +27,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+          
     steps:
       - name: Check out project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Aggiornato alla v4
 
       - name: Use Java
         uses: actions/setup-java@v4
@@ -42,9 +43,9 @@ jobs:
           secrets: ${{ toJSON(secrets) }}
 
       - name: Setup Node for Wilco Checks
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # Aggiornato alla v4
         with:
-          node-version: "16"
+          node-version: "20" # <--- Aggiornato a 20 per risolvere il conflitto con joi
 
       - name: Wilco checks
         id: Wilco
