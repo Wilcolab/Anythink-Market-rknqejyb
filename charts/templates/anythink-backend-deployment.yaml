@@ -21,7 +21,7 @@ spec:
         - args:
             - sh
             - -c
-            - "poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} app.main:app"
+            - "gradlew bootRun"
           env:
             - name: APP_ENV
               value: dev
@@ -55,10 +55,6 @@ spec:
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
       initContainers:
-        - command:
-            - sh
-            - -c
-            - "poetry run alembic upgrade head && ./seeds.sh"
           env:
             - name: APP_ENV
               value: dev
